@@ -32,6 +32,11 @@ dependencies:
     sdk: flutter
   chewie: ^1.4.0
   video_player: ^2.6.1
+  # cloud_firestore: ^4.5.0
+  # firebase_auth: ^4.4.0
+  # firebase_core: ^2.9.0
+  # fluttertoast: ^8.2.1
+  mongo_dart: ^0.9.1
 
 
   # The following adds the Cupertino Icons font to your application.

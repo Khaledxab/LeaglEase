@@ -40,6 +40,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      
       backgroundColor: Colors.black,
       body: Stack(
         fit: StackFit.expand,
@@ -128,7 +129,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                                 context,
                                 MaterialPageRoute(
                                     builder: (context) =>
-                                        const LogscC()));},
+                                        LogscCL()));},
                       child: const Text(
                         'Continue as client',
                         style: TextStyle(

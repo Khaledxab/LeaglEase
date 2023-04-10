@@ -1,69 +1,94 @@
 import 'package:flutter/material.dart';
 import 'package:legalease/screens/client/registration_screen_client.dart';
+import 'package:legalease/screens/home_screen.dart';
+import 'package:legalease/screens/client/registration_screen_client.dart';
 
-class LogscC extends StatefulWidget {
-  const LogscC({super.key});
+
+class LogscCL extends StatefulWidget {
+  LogscCL({Key? key}) : super(key: key);
 
   @override
-  State<LogscC> createState() => _LogscCState();
+  State<LogscCL> createState() => _LogscCLState();
 }
 
-class _LogscCState extends State<LogscC> {
+class _LogscCLState extends State<LogscCL> {
+  //form key
   final _formKey = GlobalKey<FormState>();
 
-  // edit controllers
-  final TextEditingController emailController = TextEditingController();
-  final TextEditingController passwordController = TextEditingController();
+  // editing controller
+  final TextEditingController emailController = new TextEditingController();
+  final TextEditingController passwordController = new TextEditingController();
+
+ 
 
   @override
   Widget build(BuildContext context) {
-    // email field
+    //email field
     final emailField = TextFormField(
-      autofocus: false,
-      controller: emailController,
-      keyboardType: TextInputType.emailAddress,
-      // validator
-      onSaved: (value) {
-        emailController.text = value!;
-      },
-      textInputAction: TextInputAction.next,
-      // field decoration
-       decoration: InputDecoration(
+        autofocus: false,
+        controller: emailController,
+        keyboardType: TextInputType.emailAddress,
+        validator: (value) {
+          if (value!.isEmpty) {
+            return ("Please Enter Your Email");
+          }
+          // regular expression for email validation
+          if (!RegExp("^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+.[a-z]")
+              .hasMatch(value)) {
+            return ("Please Enter a valid email");
+          }
+          return null;
+        },
+        onSaved: (value) {
+          emailController.text = value!;
+        },
+        textInputAction: TextInputAction.next,
+        decoration: InputDecoration(
             prefixIcon: Icon(Icons.mail),
             contentPadding: EdgeInsets.fromLTRB(20, 15, 20, 15),
             hintText: "Email",
             border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(10),
-    )));
+            )));
 
-    // password field
+    //password field
     final passwordField = TextFormField(
-      autofocus: false,
-      controller: passwordController,
-      obscureText: true,
-      // validator
-      onSaved: (value) {
-        passwordController.text = value!;
-      },
-      textInputAction: TextInputAction.done,
-      // field decoration
-       decoration: InputDecoration(
+        autofocus: false,
+        controller: passwordController,
+        obscureText: true,
+
+        validator: (value) {
+          RegExp regex = new RegExp(r'^.{6,}$');
+          if (value!.isEmpty) {
+            return ("Password is required for login");
+          }
+          if (!regex.hasMatch(value)) {
+            return ("Enter Valid Password(Min. 6 Character)");
+          }
+        },
+        onSaved: (value) {
+          passwordController.text = value!;
+        },
+        textInputAction: TextInputAction.done,
+        decoration: InputDecoration(
             prefixIcon: Icon(Icons.vpn_key),
             contentPadding: EdgeInsets.fromLTRB(20, 15, 20, 15),
             hintText: "Password",
             border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(10),
-    )));
+            )));
 
-    // login button
+    //button
     final loginButton = Material(
       elevation: 5,
       borderRadius: BorderRadius.circular(30),
-      color: Colors.green,
+      color: Colors.blueAccent,
       child: MaterialButton(
           padding: EdgeInsets.fromLTRB(20, 15, 20, 15),
           minWidth: MediaQuery.of(context).size.width,
-          onPressed: () {},
+          onPressed: () {
+            
+          },
           child: Text("Login",
               textAlign: TextAlign.center,
               style: TextStyle(
@@ -71,7 +96,6 @@ class _LogscCState extends State<LogscC> {
                   color: Colors.white,
                   fontWeight: FontWeight.bold))),
     );
-
 
     return Scaffold(
       backgroundColor: Colors.white,
@@ -135,6 +159,17 @@ class _LogscCState extends State<LogscC> {
           ),
         ),
       ),
-    ); 
+    );
   }
+
+
+
+
+
+
+
+
+
 }
+
+

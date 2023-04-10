@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "300928973554",
+    "project_id": "legalease-e8cf4",
+    "storage_bucket": "legalease-e8cf4.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:300928973554:android:ef74e7a120506e4cb3ee6b",
+        "android_client_info": {
+          "package_name": "com.example.legalease"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "300928973554-2g8lcohpujkql1o77sk82oti5t57r0r4.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.legalease",
+            "certificate_hash": "19a0a4e82602839483955ab099be9379e6e07078"
+          }
+        },
+        {
+          "client_id": "300928973554-dsrls0bs1hq2of76mlmv6gis29vnpu6l.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCGMxRrrWTUPUOh7YoYlCTxShAImVvoK0Y"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "300928973554-dsrls0bs1hq2of76mlmv6gis29vnpu6l.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
