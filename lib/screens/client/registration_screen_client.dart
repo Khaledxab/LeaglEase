@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
+import 'package:legalease/config.dart';
+import 'package:legalease/screens/welcome.dart';
 
 class RegscCL extends StatefulWidget {
   const RegscCL({super.key});
@@ -18,6 +22,31 @@ class _RegscCLState extends State<RegscCL> {
   final confirmPasswordEditingController = new TextEditingController();
   late bool _sucess;
   late String _userEmail;
+
+    void registerUser() async{
+    if(firstNameEditingController.text.isNotEmpty && secondNameEditingController.text.isNotEmpty
+    && emailEditingController.text.isNotEmpty && passwordEditingController.text.isNotEmpty){
+      var regBody = {
+        "firstName": firstNameEditingController.text,
+        "secondName": secondNameEditingController.text,
+        "email": emailEditingController.text,
+        "password": passwordEditingController.text,
+        "confirmPassword": confirmPasswordEditingController.text
+      };
+      var response = await http.post(Uri.parse(registration),
+      headers: {"Content-Type":"application/json"},
+      body: jsonEncode(regBody)
+      );
+      var jsonResponse = jsonDecode(response.body);
+      print(jsonResponse['status']);
+      if(jsonResponse['status']){
+        Navigator.push(context, MaterialPageRoute(builder: (context)=>WelcomeScreen()));
+      }else{
+        print("SomeThing Went Wrong");
+      }
+    }
+  }
+
 
 
 
@@ -164,7 +193,9 @@ class _RegscCLState extends State<RegscCL> {
       child: MaterialButton(
           padding: EdgeInsets.fromLTRB(20, 15, 20, 15),
           minWidth: MediaQuery.of(context).size.width,
-          onPressed: () {},
+          onPressed: () {
+            registerUser();
+          },
           child: Text(
             "SignUp",
             textAlign: TextAlign.center,

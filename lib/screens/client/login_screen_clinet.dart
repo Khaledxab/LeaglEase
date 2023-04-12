@@ -2,7 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:legalease/screens/client/registration_screen_client.dart';
 import 'package:legalease/screens/home_screen.dart';
 import 'package:legalease/screens/client/registration_screen_client.dart';
+import 'package:legalease/screens/welcome.dart';
+import 'package:legalease/config.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 
+
+import 'package:shared_preferences/shared_preferences.dart';
 
 class LogscCL extends StatefulWidget {
   LogscCL({Key? key}) : super(key: key);
@@ -19,7 +25,41 @@ class _LogscCLState extends State<LogscCL> {
   final TextEditingController emailController = new TextEditingController();
   final TextEditingController passwordController = new TextEditingController();
 
- 
+  late SharedPreferences prefs;
+
+  @override
+  void initState() {
+    super.initState();
+    initSharedPref();
+  }
+
+  void initSharedPref() async {
+    prefs = await SharedPreferences.getInstance();
+  }
+
+  //login user
+  void loginUser() async {
+    if (emailController.text.isNotEmpty && passwordController.text.isNotEmpty) {
+      var regBody = {
+        "email": emailController.text,
+        "password": passwordController.text,
+      };
+      var response = await http.post(Uri.parse(login),
+          headers: {"Content-Type":"application/json"},
+          body: jsonEncode(regBody)
+      );
+      
+      var jsonResponse = jsonDecode(response.body);
+      if(jsonResponse['status']){
+          var myToken = jsonResponse['token'];
+          prefs.setString('token', myToken);
+          Navigator.push(context, MaterialPageRoute(builder: (context)=>HomeScreen(token: myToken,)));
+      }else{
+        print('Something went wrong');
+      }
+    }
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -56,7 +96,6 @@ class _LogscCLState extends State<LogscCL> {
         autofocus: false,
         controller: passwordController,
         obscureText: true,
-
         validator: (value) {
           RegExp regex = new RegExp(r'^.{6,}$');
           if (value!.isEmpty) {
@@ -87,7 +126,7 @@ class _LogscCLState extends State<LogscCL> {
           padding: EdgeInsets.fromLTRB(20, 15, 20, 15),
           minWidth: MediaQuery.of(context).size.width,
           onPressed: () {
-            
+            loginUser();
           },
           child: Text("Login",
               textAlign: TextAlign.center,
@@ -141,8 +180,7 @@ class _LogscCLState extends State<LogscCL> {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) =>
-                                        RegscCL()));
+                                    builder: (context) => RegscCL()));
                           },
                           child: Text(
                             "SignUP",
@@ -161,15 +199,4 @@ class _LogscCLState extends State<LogscCL> {
       ),
     );
   }
-
-
-
-
-
-
-
-
-
 }
-
-

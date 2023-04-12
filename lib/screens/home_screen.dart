@@ -1,14 +1,27 @@
 import 'package:flutter/material.dart';
 import 'package:legalease/screens/welcome.dart';
+import 'package:jwt_decoder/jwt_decoder.dart';
 
 class HomeScreen extends StatefulWidget {
-  const HomeScreen({super.key});
+  final token;
+  const HomeScreen({@required this.token, super.key});
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  late String email;
+
+  @override
+  void initState() {
+    super.initState();
+    Map<String, dynamic> jwtDecodedToken = JwtDecoder.decode(widget.token);
+
+    email = jwtDecodedToken['email'];
+  }
+
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -39,7 +52,7 @@ class _HomeScreenState extends State<HomeScreen> {
               SizedBox(
                 height: 10,
               ),
-              Text("Name",
+              Text(email,
                   style: TextStyle(
                     color: Colors.black54,
                     fontWeight: FontWeight.w500,

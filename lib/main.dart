@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:legalease/dbHelper/mongodb.dart';
 import 'package:legalease/screens/home_screen.dart';
 import 'package:legalease/screens/welcome.dart';
 
-void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  await MongoDatabase.connect();
+void main() {
   runApp(const MyApp());
 }
 
