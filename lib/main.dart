@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:legalease/screens/home_screen.dart';
+import 'package:legalease/screens/client/client_home.dart';
+import 'package:legalease/screens/client/first.dart';
 import 'package:legalease/screens/welcome.dart';
 
 void main() {
@@ -17,7 +18,8 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: WelcomeScreen(),
+      home: clHome(),
+      debugShowCheckedModeBanner: false,
     );
   }
 }

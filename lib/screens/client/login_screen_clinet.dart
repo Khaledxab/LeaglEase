@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:legalease/screens/client/registration_screen_client.dart';
-import 'package:legalease/screens/home_screen.dart';
+import 'package:legalease/screens/client/first.dart';
 import 'package:legalease/screens/client/registration_screen_client.dart';
 import 'package:legalease/screens/welcome.dart';
 import 'package:legalease/config.dart';
