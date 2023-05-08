@@ -1,13 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
+import 'package:legalease/config.dart';
+import 'package:legalease/screens/welcome.dart';
 
 class RegscLW extends StatefulWidget {
   const RegscLW({super.key});
 
   @override
-  State<RegscLW> createState() => _RegistrationScreenState();
+  State<RegscLW> createState() => _RegscLWState();
 }
 
-class _RegistrationScreenState extends State<RegscLW> {
+class _RegscLWState extends State<RegscLW> {
 // our form key
   final _formKey = GlobalKey<FormState>();
   // editing Controller
@@ -18,6 +22,31 @@ class _RegistrationScreenState extends State<RegscLW> {
   final confirmPasswordEditingController = new TextEditingController();
   late bool _sucess;
   late String _userEmail;
+
+    void registerUser() async{
+    if(firstNameEditingController.text.isNotEmpty && secondNameEditingController.text.isNotEmpty
+    && emailEditingController.text.isNotEmpty && passwordEditingController.text.isNotEmpty){
+      var regBody = {
+        "firstName": firstNameEditingController.text,
+        "secondName": secondNameEditingController.text,
+        "email": emailEditingController.text,
+        "password": passwordEditingController.text,
+        "confirmPassword": confirmPasswordEditingController.text
+      };
+      var response = await http.post(Uri.parse(registration2),
+      headers: {"Content-Type":"application/json"},
+      body: jsonEncode(regBody)
+      );
+      var jsonResponse = jsonDecode(response.body);
+      print(jsonResponse['status']);
+      if(jsonResponse['status']){
+        Navigator.push(context, MaterialPageRoute(builder: (context)=>WelcomeScreen()));
+      }else{
+        print("SomeThing Went Wrong");
+      }
+    }
+  }
+
 
 
 
@@ -104,7 +133,7 @@ class _RegistrationScreenState extends State<RegscLW> {
           ),
         ));
 
-    //password field
+    //paxssword field
     final passwordField = TextFormField(
         autofocus: false,
         controller: passwordEditingController,
@@ -164,7 +193,9 @@ class _RegistrationScreenState extends State<RegscLW> {
       child: MaterialButton(
           padding: EdgeInsets.fromLTRB(20, 15, 20, 15),
           minWidth: MediaQuery.of(context).size.width,
-          onPressed: () {},
+          onPressed: () {
+            registerUser();
+          },
           child: Text(
             "SignUp",
             textAlign: TextAlign.center,
@@ -200,7 +231,7 @@ class _RegistrationScreenState extends State<RegscLW> {
                     SizedBox(
                         height: 180,
                         child: Image.asset(
-                          "assets/logo.png",
+                          "assets/client.png",
                           fit: BoxFit.contain,
                         )),
                     SizedBox(height: 45),

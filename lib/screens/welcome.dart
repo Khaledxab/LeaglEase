@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:legalease/screens/Lawyer/registration_screen_lawyer.dart';
 import 'package:legalease/screens/client/login_screen_clinet.dart';
 import 'package:legalease/screens/lawyer/login_screen_lawyer.dart';
 import 'package:video_player/video_player.dart';
@@ -112,7 +113,11 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                         style: ElevatedButton.styleFrom(
                           primary: Colors.red,
                         ),
-                        onPressed: () {},
+                        onPressed: () {Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) =>
+                                        RegscLW()));},
                         child: const Text(
                           'Continue as lawyer',
                           style: TextStyle(

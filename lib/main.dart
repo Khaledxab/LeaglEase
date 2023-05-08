@@ -3,6 +3,8 @@ import 'package:legalease/screens/client/client_home.dart';
 import 'package:legalease/screens/client/first.dart';
 import 'package:legalease/screens/welcome.dart';
 
+import 'screens/Lawyer/profile_LW.dart';
+
 void main() {
   runApp(const MyApp());
 }
@@ -18,7 +20,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: clHome(),
+      home: HomeScreen(),
       debugShowCheckedModeBanner: false,
     );
   }
