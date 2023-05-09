@@ -20,20 +20,22 @@ class _RegscLWState extends State<RegscLW> {
   final emailEditingController = new TextEditingController();
   final passwordEditingController = new TextEditingController();
   final confirmPasswordEditingController = new TextEditingController();
+  final jobEditingController = new TextEditingController();
   late bool _sucess;
   late String _userEmail;
 
     void registerUser() async{
     if(firstNameEditingController.text.isNotEmpty && secondNameEditingController.text.isNotEmpty
-    && emailEditingController.text.isNotEmpty && passwordEditingController.text.isNotEmpty){
+    && emailEditingController.text.isNotEmpty && passwordEditingController.text.isNotEmpty && jobEditingController.text.isNotEmpty){
       var regBody = {
         "firstName": firstNameEditingController.text,
         "secondName": secondNameEditingController.text,
         "email": emailEditingController.text,
         "password": passwordEditingController.text,
-        "confirmPassword": confirmPasswordEditingController.text
+        "confirmPassword": confirmPasswordEditingController.text,
+        "job": jobEditingController.text,
       };
-      var response = await http.post(Uri.parse(registration2),
+      var response = await http.post(Uri.parse(registration),
       headers: {"Content-Type":"application/json"},
       body: jsonEncode(regBody)
       );
@@ -175,11 +177,40 @@ class _RegscLWState extends State<RegscLW> {
         onSaved: (value) {
           confirmPasswordEditingController.text = value!;
         },
-        textInputAction: TextInputAction.done,
+        textInputAction: TextInputAction.next,
         decoration: InputDecoration(
           prefixIcon: Icon(Icons.vpn_key),
           contentPadding: EdgeInsets.fromLTRB(20, 15, 20, 15),
           hintText: "Confirm Password",
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(10),
+          ),
+        ));
+
+        // job field
+        final jobField = TextFormField(
+        autofocus: false,
+        controller: jobEditingController,
+        keyboardType: TextInputType.name,
+        validator: (value) {
+          if (value!.isEmpty) {
+            return ("Please Enter Your job");
+          }
+          // reg expression for email validation
+          if (!RegExp("^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+.[a-z]")
+              .hasMatch(value)) {
+            return ("Please Enter a valid job");
+          }
+          return null;
+        },
+        onSaved: (value) {
+          jobEditingController.text = value!;
+        },
+        textInputAction: TextInputAction.done,
+        decoration: InputDecoration(
+          prefixIcon: Icon(Icons.light_mode),
+          contentPadding: EdgeInsets.fromLTRB(20, 15, 20, 15),
+          hintText: "Field of Law",
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(10),
           ),
@@ -244,6 +275,8 @@ class _RegscLWState extends State<RegscLW> {
                     passwordField,
                     SizedBox(height: 20),
                     confirmPasswordField,
+                    SizedBox(height: 20),
+                    jobField,
                     SizedBox(height: 20),
                     signUpButton,
                     SizedBox(height: 15),

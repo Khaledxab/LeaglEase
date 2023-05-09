@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
 import '../../config.dart';
+import '../widgets/my_nav_bar.dart';
 
 class clHome extends StatelessWidget {
   Future<List<dynamic>> _getUsers() async {
@@ -22,7 +23,7 @@ class clHome extends StatelessWidget {
           icon: Icon(Icons.arrow_back),
           onPressed: () => Navigator.pop(context),
         ),
-        title: Text('Let Us Help You'),
+        title: Center(child: Text('Lawyers List')),
         actions: [
           IconButton(
             icon: Icon(Icons.search),
@@ -55,6 +56,8 @@ class clHome extends StatelessWidget {
           return Center(child: CircularProgressIndicator());
         },
       ),
+      extendBody: true,
+      bottomNavigationBar: const BottomNavBarCurvedFb1(),
     );
   }
 }
