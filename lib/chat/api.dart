@@ -24,3 +24,4 @@ class ChatApi {
     return chatCompletion.choices.first.message.content;
   }
 }
+

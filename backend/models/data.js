@@ -23,3 +23,4 @@ const DataModel = db.model('data', dataSchema);
 
 module.exports = DataModel;
 
+

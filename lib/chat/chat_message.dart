@@ -4,3 +4,4 @@ class ChatMessage {
   final String content;
   final bool isUserMessage;
 }
+
