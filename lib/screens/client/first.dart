@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:legalease/screens/welcome.dart';
 import 'package:jwt_decoder/jwt_decoder.dart';
-import 'package:legalease/screens/client/client_home.dart';
+import 'package:legalease/screens/client/lawyer_list.dart';
 
 class HomeScreen extends StatefulWidget {
   final token;
@@ -27,7 +27,7 @@ class _HomeScreenState extends State<HomeScreen> {
     
     Timer timer = Timer(Duration(seconds: 3), () {
       Navigator.push(
-          context, MaterialPageRoute(builder: (context) => clHome()));
+          context, MaterialPageRoute(builder: (context) => lwListe()));
     });
     
   }

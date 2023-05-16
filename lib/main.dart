@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:legalease/screens/client/client_home.dart';
+import 'package:legalease/screens/client/lawyer_list.dart';
 import 'package:legalease/screens/client/first.dart';
 import 'package:legalease/screens/welcome.dart';
 

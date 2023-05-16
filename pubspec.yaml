@@ -46,6 +46,7 @@ dependencies:
   flutter_pdfview: 
   velocity_x:
   chat_gpt_sdk:
+  dart_openai:
 
 
   # The following adds the Cupertino Icons font to your application.

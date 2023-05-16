@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:legalease/screens/client/client_home%20copy.dart';
+import 'package:legalease/screens/client/createCase.dart';
 import 'package:legalease/screens/welcome.dart';
+
+import '../../chat/chat_page.dart';
+import '../../chat/api.dart';
+import '../client/cases_history.dart';
+import '../client/docs.dart';
 
 
 
@@ -57,7 +62,7 @@ class _BottomNavBarCurvedFb1State extends State<BottomNavBarCurvedFb1> {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => WelcomeScreen()));
+                            builder: (context) => MyCasesHistoryPage()));
                   },
                   defaultColor: secondaryColor,
                   selectedColor: primaryColor,
@@ -78,17 +83,20 @@ class _BottomNavBarCurvedFb1State extends State<BottomNavBarCurvedFb1> {
                     text: "Hot alerts",
                     icon: Icons.chat_outlined, 
                     selected: false,
-                    onPressed: () {Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => WelcomeScreen()));},
-                    defaultColor: secondaryColor,
-                    selectedColor: primaryColor),
+                    onPressed: () {Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => ChatPage(chatApi: ChatApi()))
+              );
+            },
+            defaultColor: secondaryColor,
+            selectedColor: primaryColor,),
                 NavBarIcon(
                   text: "camera",
                   icon: Icons.document_scanner_outlined,
                   selected: false,
                   onPressed: () {
                     Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => WelcomeScreen()));
+                        MaterialPageRoute(builder: (context) => PdfPage()));
                   },
                   selectedColor: primaryColor,
                   defaultColor: secondaryColor,
